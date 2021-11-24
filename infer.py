@@ -25,7 +25,7 @@ device = 'cuda:0'
 
 #path
 image_dir = 'dataset/test/'
-model_path = 'D:/NCTU/2021_09/DeepLearning_/proj/HW2/runs/train/0.40/weights/best.pt'
+model_path = 'best.pt'
 save_dir = 'result/'
 filepath = 'result/labels/'
 #answer
