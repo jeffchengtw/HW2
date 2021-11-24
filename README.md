@@ -26,6 +26,17 @@ python infer.py
 ```
 
 # Inference on colab screenshot
+data sorting in dataset.py<br>
+```
+class LoadImage:
+   elif os.path.isdir(p):
+              files = []
+              data_listdir = os.listdir(path)
+              data_listdir.sort(key = lambda x: int(x[:-4]))
+              for name in data_listdir:
+                  imgname = path + name
+                  files.append(imgname)
+```
 ![image](https://github.com/jeffchengtw/HW2/blob/main/screenshot/inference_colab2.PNG)
 
 # Reference
