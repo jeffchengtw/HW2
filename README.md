@@ -29,6 +29,6 @@ python infer.py
 ![image](https://github.com/jeffchengtw/HW2/blob/main/screenshot/inference.PNG)
 
 #Reference
-https://github.com/chia56028/Street-View-House-Numbers-Detection
-https://github.com/ultralytics/yolov5
-https://github.com/penny4860
+https://github.com/chia56028/Street-View-House-Numbers-Detection<br>
+https://github.com/ultralytics/yolov5<br>
+https://github.com/penny4860<br>
