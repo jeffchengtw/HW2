@@ -18,6 +18,9 @@ from utils.general import (LOGGER, check_file, check_img_size, check_imshow, che
 from models.common import DetectMultiBackend
 import torch, torchvision
 
+from google.colab import drive
+drive.mount('/content/drive')
+
 print(torch.__version__, torch.cuda.is_available())
 print(sys.version)
 
