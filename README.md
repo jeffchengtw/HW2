@@ -20,9 +20,15 @@ torchvision==0.11.1+cu102 <br>
 pip install -r requirements.txt
 ```
 # Inference
-cd to path<br>
+```
+cd to path
 python infer.py
+```
 
 # Inference speed screen shot
 ![image](https://github.com/jeffchengtw/HW2/blob/main/screenshot/inference.PNG)
 
+#Reference
+https://github.com/chia56028/Street-View-House-Numbers-Detection
+https://github.com/ultralytics/yolov5
+https://github.com/penny4860
