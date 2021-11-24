@@ -13,3 +13,5 @@
 | 57%   48C    P2    43W / 175W |   1733MiB /  8192MiB |     11%      Default |
 +-------------------------------+----------------------+----------------------+
 ```
+# inference speed screen shot
+![image](https://github.com/jeffchengtw/HW2/blob/main/screenshot/inference.PNG)
