@@ -25,7 +25,7 @@ cd to path
 python infer.py
 ```
 
-# Inference speed screen shot
+# Inference on colab screenshot
 ![image](https://github.com/jeffchengtw/HW2/blob/main/screenshot/inference_colab.PNG)
 
 # Reference
