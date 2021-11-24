@@ -26,7 +26,7 @@ python infer.py
 ```
 
 # Inference speed screen shot
-![image](https://github.com/jeffchengtw/HW2/blob/main/screenshot/inference.PNG)
+![image](https://github.com/jeffchengtw/HW2/blob/main/screenshot/inference_colab.PNG)
 
 # Reference
 https://github.com/chia56028/Street-View-House-Numbers-Detection<br>
