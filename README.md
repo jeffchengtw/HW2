@@ -26,7 +26,7 @@ python infer.py
 ```
 
 # Inference on colab screenshot
-![image](https://github.com/jeffchengtw/HW2/blob/main/screenshot/inference_colab.PNG)
+![image](https://github.com/jeffchengtw/HW2/blob/main/screenshot/inference_colab2.PNG)
 
 # Reference
 https://github.com/chia56028/Street-View-House-Numbers-Detection<br>
