@@ -13,12 +13,22 @@
 | 57%   48C    P2    43W / 175W |   1733MiB /  8192MiB |     11%      Default |
 +-------------------------------+----------------------+----------------------+
 ```
-# Inference speed screen shot
-![image](https://github.com/jeffchengtw/HW2/blob/main/screenshot/inference.PNG)
-
 # Env
-torch==1.10.0+cu102
-torchvision==0.11.1+cu102
+torch==1.10.0+cu102 <br>
+torchvision==0.11.1+cu102 <br>
 ```
 pip install -r requirements.txt
 ```
+# Inference
+```
+cd to path
+python infer.py
+```
+
+# Inference speed screen shot
+![image](https://github.com/jeffchengtw/HW2/blob/main/screenshot/inference.PNG)
+
+# Reference
+https://github.com/chia56028/Street-View-House-Numbers-Detection<br>
+https://github.com/ultralytics/yolov5<br>
+https://github.com/penny4860<br>
