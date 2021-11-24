@@ -28,7 +28,7 @@ python infer.py
 # Inference speed screen shot
 ![image](https://github.com/jeffchengtw/HW2/blob/main/screenshot/inference.PNG)
 
-#Reference
+#Reference<br>
 https://github.com/chia56028/Street-View-House-Numbers-Detection<br>
 https://github.com/ultralytics/yolov5<br>
 https://github.com/penny4860<br>
