@@ -1,4 +1,7 @@
 import argparse
+import time
+from tqdm import tqdm
+from google_drive_downloader import GoogleDriveDownloader as gdd
 import os
 import sys
 import cv2
@@ -13,8 +16,12 @@ from utils.general import (LOGGER, check_file, check_img_size, check_imshow, che
                            increment_path, non_max_suppression, print_args, scale_coords, strip_optimizer, xyxy2xywh)
 
 from models.common import DetectMultiBackend
+import torch, torchvision
 
-# param
+print(torch.__version__, torch.cuda.is_available())
+print(sys.version)
+
+# ----------------param-------------
 conf_thres = 0.25
 iou_thres = 0.45
 classes = None
@@ -22,18 +29,24 @@ agnostic_nms = False
 max_det = 999
 img_size = [640, 640]
 device = 'cuda:0'
-
 #path
 image_dir = 'dataset/test/'
 model_path = 'best.pt'
 save_dir = 'result/'
 filepath = 'result/labels/'
+# -----------------------------------
+
 #answer
 data = []
 result_to_json = []
 
 
+# download file
+gdd.download_file_from_google_drive(file_id='1Fm-avdeNgzhPxhvia0iw9yZzcoOggy7I',
+                                    dest_path='dataset/test.zip',
+                                    unzip=True)
 
+# Initialize model
 model = DetectMultiBackend(model_path, device=device, dnn=False)
 model.model.float()
 model(torch.zeros(1, 3, *img_size).to(device).type_as(next(model.model.parameters())))  # warmup
@@ -41,7 +54,9 @@ model(torch.zeros(1, 3, *img_size).to(device).type_as(next(model.model.parameter
 #load image
 dataset = LoadImages(image_dir, img_size=img_size, stride=32)
 
-for path, img, im0s, vid_cap, s in dataset:
+# --------------------------reproducing the submission----------------------------------------------------
+print('reproducing the submission...')
+for path, img, im0s in dataset:
     img = torch.from_numpy(img).to(device)
     img =img.float()
     img /= 255
@@ -57,7 +72,7 @@ for path, img, im0s, vid_cap, s in dataset:
     gn = torch.tensor(im0s.shape)[[1, 0, 1, 0]]  # normalization gain whwh
     # Rescale boxes from img_size to im0 size
     det[:, :4] = scale_coords(img.shape[2:], det[:, :4], im0s.shape).round()
-# write to txt file
+    # write to txt file
     if not os.path.isdir('result/labels'):
         os.makedirs('result/labels')
     for *xyxy, conf, cls in reversed(det):
@@ -66,6 +81,7 @@ for path, img, im0s, vid_cap, s in dataset:
                         line = (cls, *xywh, conf)  # label format
                         with open(txt_path + '.txt', 'a') as f:
                             f.write(('%g ' * len(line)).rstrip() % line + '\n')
+print('dump to answer.json...')
 # dump to answer.json
 all_file = os.listdir(filepath)
 for file in all_file:
@@ -89,7 +105,6 @@ for file in all_file:
         top = float(h_center - height/2)
         tmp['bbox'] = (tuple((left, top, width, height)))
         tmp['score'] = (float(c[5]))
-        print(tmp)
         result_to_json.append(tmp)
 f.close()
 ret = json.dumps(result_to_json, indent=4)
@@ -97,3 +112,30 @@ ret = json.dumps(result_to_json, indent=4)
 print(len(result_to_json))
 with open('answer.json', 'w') as fp:
     fp.write(ret)   
+# --------------------------reproducing the submission end----------------------------------------------------
+
+print('inference benchmark...')
+#for inference.ipynb bench mark
+TEST_IMAGE_NUMBER = 100 
+tmp = []
+for path, img, im0s in dataset:
+    print(path + 'append to test image list')
+    tmp.append(img)
+test_img_list = tmp[:TEST_IMAGE_NUMBER]
+
+start_time = time.time()
+for img in tqdm(test_img_list):
+    img = torch.from_numpy(img).to(device)
+    img =img.float()
+    img /= 255
+    img = img[None]
+    pred = model(img)
+    pred = non_max_suppression(pred, conf_thres, iou_thres, classes, agnostic_nms, max_det=max_det)
+end_time  = time.time()
+print("\nInference time per image: ", (end_time - start_time) / len(test_img_list))
+
+
+
+
+
+

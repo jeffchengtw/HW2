@@ -163,7 +163,13 @@ class LoadImages:
         if '*' in p:
             files = sorted(glob.glob(p, recursive=True))  # glob
         elif os.path.isdir(p):
-            files = sorted(glob.glob(os.path.join(p, '*.*')))  # dir
+            files = []
+            data_listdir = os.listdir(path)
+            data_listdir.sort(key = lambda x: int(x[:-4]))
+            for name in data_listdir:
+                imgname = path + name
+                files.append(imgname)
+            #files = sorted(glob.glob(os.path.join(p, '*.*')))  # dir
         elif os.path.isfile(p):
             files = [p]  # files
         else:
@@ -227,7 +233,7 @@ class LoadImages:
         img = img.transpose((2, 0, 1))[::-1]  # HWC to CHW, BGR to RGB
         img = np.ascontiguousarray(img)
 
-        return path, img, img0, self.cap, s
+        return path, img, img0
 
     def new_video(self, path):
         self.frame = 0
