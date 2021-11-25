@@ -20,6 +20,8 @@ torchvision==0.11.1+cu102 <br>
 pip install -r requirements.txt
 ```
 # Inference
+download best.pt
+https://github.com/jeffchengtw/HW2/blob/main/best.pt
 ```
 cd to path
 python infer.py
